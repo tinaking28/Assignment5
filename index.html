@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Joe's Hotdogs</title>
+</head>
+<body>
+	Hotodgs: <input id="hdog"><br>
+	Fries: <input id="fry"><br>
+	Sodas: <input id="soda"><br>
+
+	<button id="say">Say hi!</button>
+	<div id="result">
+		<ul>
+			<li id = "subtotal"></li>
+			<li id = "discount"></li>
+			<li id = "tax"></li>
+			<li id = "total"></li>
+
+		</ul>
+	</div>
+
+	<script language="javascript">
+		function say_hi() {
+			var hdog = parseInt(document.getElementById("hdog").value);
+			var fry = parseInt(document.getElementById("fry").value);
+			var soda = parseInt(document.getElementById("soda").value);
+			var subtotal = (hdog * 3.25) + (fry *2.0) + (soda * 1.5);
+    		
+    		document.getElementById('subtotal').innerHTML = "Subtotal: " + subtotal;
+    		var discount = 0;
+    		if(subtotal > 20){
+    			discount = subtotal * .1;
+    		}
+    		document.getElementById('discount').innerHTML = "Discount: " + discount;
+    		var discounted = subtotal - discount;
+    		var tax = discounted * .065;
+    		var total = discounted + tax;
+    		document.getElementById('tax').innerHTML = "Tax: " + tax;
+    		document.getElementById('total').innerHTML = "Total: " + total;
+
+		}		
+		document.getElementById('say').addEventListener('click', say_hi);
+
+	</script>
+</body>
+</html>
