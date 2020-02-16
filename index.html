@@ -3,14 +3,28 @@
 <head>
 	<title>Joe's Hotdogs</title>
 </head>
+<style type="text/css">
+	ul{
+		list-style-type: none;
+	}
+
+/*	#discount{
+		visibility: hidden;
+	}*/
+</style>
 <body>
-	Hotodgs: <input id="hdog"><br>
-	Fries: <input id="fry"><br>
-	Sodas: <input id="soda"><br>
+	<h1>Joe's Hotdogs</h1>
+	Hotodgs: <input id="hdog"><br><br>
+	Fries: <input id="fry"><br><br>
+	Sodas: <input id="soda"><br><br>
 
 	<button id="say">Say hi!</button>
 	<div id="result">
 		<ul>
+			<li id = "numhdog"></li>
+			<li id = "numfry"></li>
+			<li id = "numsoda"></li>
+
 			<li id = "subtotal"></li>
 			<li id = "discount"></li>
 			<li id = "tax"></li>
@@ -24,19 +38,27 @@
 			var hdog = parseInt(document.getElementById("hdog").value);
 			var fry = parseInt(document.getElementById("fry").value);
 			var soda = parseInt(document.getElementById("soda").value);
-			var subtotal = (hdog * 3.25) + (fry *2.0) + (soda * 1.5);
-    		
-    		document.getElementById('subtotal').innerHTML = "Subtotal: " + subtotal;
+			var hdog_subtotal = hdog * 3.25;
+			var fry_subtotal = fry * 2.0;
+			var soda_subtotal = soda * 1.5;
+    		document.getElementById('numhdog').innerHTML = hdog + " hotdogs at 3.25 each is: $" + hdog_subtotal;
+    		document.getElementById('numfry').innerHTML = fry + " fries at 2.00 each is: $" + fry_subtotal;
+    		document.getElementById('numsoda').innerHTML = soda + " sodas at 1.50 each is: $" + soda_subtotal;
+    		var subtotal = hdog_subtotal + fry_subtotal + soda_subtotal;
+    		document.getElementById('subtotal').innerHTML = "Subtotal: $" + subtotal;
     		var discount = 0;
     		if(subtotal > 20){
     			discount = subtotal * .1;
+    		}else{
+    			document.getElementById('discount').style.visibility = "hidden";
+
     		}
-    		document.getElementById('discount').innerHTML = "Discount: " + discount;
+    		document.getElementById('discount').innerHTML = "You qualified for a discount!! <br> Discount: $" + discount;
     		var discounted = subtotal - discount;
     		var tax = discounted * .065;
     		var total = discounted + tax;
-    		document.getElementById('tax').innerHTML = "Tax: " + tax;
-    		document.getElementById('total').innerHTML = "Total: " + total;
+    		document.getElementById('tax').innerHTML = "Tax: $" + tax;
+    		document.getElementById('total').innerHTML = "Total: $" + total;
 
 		}		
 		document.getElementById('say').addEventListener('click', say_hi);
